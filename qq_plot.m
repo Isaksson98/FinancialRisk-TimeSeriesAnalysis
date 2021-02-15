@@ -1,12 +1,11 @@
-function qq_plot(returns, sigma, delta_t)
+function qq_plot(returns, sigma)
 
 n = length(returns);
 norm = zeros(n,1);
 u = zeros(n,1);
 
-for i = 1:n
-    
-    u(i) = normcdf( (returns(i) - delta_t*sigma^2) /(sigma*sqrt(delta_t)) );
+for i = 1:n 
+    u(i) = normcdf( (returns(i) - sigma^2) / (sigma) );
     norm(i) = norminv( (i-0.5)/n );
 end
 

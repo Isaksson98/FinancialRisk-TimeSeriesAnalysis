@@ -1,13 +1,25 @@
-function sigma = EqWMA(u,m, trade_time)
+function sigmas = EqWMA(u,k,trade_time)
 
-sigma_sum = 0;
 n = length(u);
+sigmas = zeros(n + 1, 1);
 
-for i = 1:m
-    sigma_sum = sigma_sum + u(n-i)^2; 
+%sum = 0;
+
+%for i = (t-k):(t-1)
+%    sum = sum + u(i)^2;
+%    sigmas(i - t + k + 1) = sqrt(1/k * sum * trade_time)*100;
+%end
+
+for t = k:n
+    
+    sum = 0;
+    
+    for i = (t - (k - 1)):t
+        sum = sum + u(i)^2;
+    end
+    
+    sigmas(t + 1) = sqrt(1/k * sum * trade_time)*100;
 end
-
-sigma = (1/m) * sigma_sum * trade_time;
 
 end
 
